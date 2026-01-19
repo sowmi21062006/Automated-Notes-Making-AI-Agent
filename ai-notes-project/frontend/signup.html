@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sign Up | AI Notes</title>
+<style>
+/* Base gradient */
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #e0f7fa, #f1f8e9);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Animated papers */
+.paper {
+    position: absolute;
+    width: 50px;
+    height: 30px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    animation: fly linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes fly {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0.6; }
+    50% { transform: translateY(50vh) rotate(15deg); opacity: 1; }
+    100% { transform: translateY(-20vh) rotate(-10deg); opacity: 0.6; }
+}
+
+/* Random positions and durations */
+.paper:nth-child(1) { left: 10%; animation-duration: 18s; animation-delay: 0s; }
+.paper:nth-child(2) { left: 30%; animation-duration: 20s; animation-delay: 3s; }
+.paper:nth-child(3) { left: 50%; animation-duration: 22s; animation-delay: 1s; }
+.paper:nth-child(4) { left: 70%; animation-duration: 19s; animation-delay: 2s; }
+.paper:nth-child(5) { left: 85%; animation-duration: 21s; animation-delay: 4s; }
+
+/* Signup card */
+.signup-box {
+    position: relative;
+    z-index: 2;
+    width: 360px;
+    padding: 35px;
+    border-radius: 14px;
+    background: white;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+    text-align: center;
+    animation: fadeUp 1s ease;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 { margin-bottom: 22px; color: #333; }
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 14px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover { background: #43a047; }
+
+.links { margin-top: 16px; font-size: 14px; }
+.links a { color: #4CAF50; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<!-- Flying papers -->
+<div class="paper"></div>
+<div class="paper"></div>
+<div class="paper"></div>
+<div class="paper"></div>
+<div class="paper"></div>
+
+<!-- Signup form -->
+<div class="signup-box">
+    <h2>Create Account</h2>
+    <input type="text" id="user" placeholder="Username">
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="pass" placeholder="Password">
+    <input type="password" id="cpass" placeholder="Confirm Password">
+    <button onclick="signup()">Sign Up</button>
+    <div class="links">
+        <p>Already have an account? <a href="login.html">Login</a></p>
+        <p><a href="index.html">← Back to Home</a></p>
+    </div>
+</div>
+
+<script>
+function signup(){
+    const u = document.getElementById("user").value;
+    const p = document.getElementById("pass").value;
+    const c = document.getElementById("cpass").value;
+
+    if(u && p && p === c){
+        localStorage.setItem("savedUser", u);
+        localStorage.setItem("savedPass", p);
+        alert("Account created successfully!");
+        window.location.href = "login.html";
+    } else {
+        alert("Please check your inputs");
+    }
+}
+</script>
+
+</body>
+</html>

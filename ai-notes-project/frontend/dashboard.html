@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+    }
+    .dashboard {
+      max-width: 900px;
+      margin: auto;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+    .logout {
+      text-align: right;
+    }
+    .logout button {
+      background: #e53935;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .card h3 {
+      margin-top: 0;
+      color: #2e7d32;
+    }
+    textarea, input[type="file"] {
+      width: 100%;
+      margin-top: 10px;
+      padding: 12px;
+      font-size: 14px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button.main-btn {
+      margin-top: 15px;
+      padding: 12px;
+      width: 100%;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button.main-btn:hover {
+      background-color: #43a047;
+    }
+    .notes-section h4 {
+      margin-bottom: 6px;
+      color: #1b5e20;
+    }
+    .notes-box {
+      background: #f9f9f9;
+      padding: 14px;
+      border-left: 4px solid #4CAF50;
+      margin-bottom: 18px;
+      white-space: pre-line;
+      border-radius: 4px;
+    }
+    #audioStatus {
+      margin-top: 10px;
+      color: #555;
+      font-size: 14px;
+      white-space: pre-line;
+    }
+  </style>
+</head>
+<body>
+
+<div class="dashboard">
+  <div class="logout">
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <h2>📘 AI Notes Making Dashboard</h2>
+
+  <div class="card">
+    <h3>Generate Notes from Paragraph</h3>
+    <textarea id="inputText" rows="6" placeholder="Paste your paragraph here..."></textarea>
+    <button class="main-btn" onclick="generateTextNotes()">Generate Notes</button>
+  </div>
+
+  <div class="card">
+    <h3>Upload Audio (Demo)</h3>
+    <input type="file" accept="audio/*">
+    <button class="main-btn" onclick="convertAudio()">Convert Audio</button>
+    <p id="audioStatus"></p>
+  </div>
+
+  <div class="card notes-section">
+    <h3>Generated Notes</h3>
+    <h4>📌 Key Points</h4>
+    <div class="notes-box" id="keyPoints">—</div>
+    <h4>🧠 Summary</h4>
+    <div class="notes-box" id="summary">—</div>
+    <h4>✅ Conclusion</h4>
+    <div class="notes-box" id="conclusion">—</div>
+  </div>
+</div>
+
+<script>
+  // Check login status
+  if(localStorage.getItem("loggedIn") !== "true"){
+    window.location.href = "login.html";
+  }
+
+  function logout(){
+    localStorage.removeItem("loggedIn");
+    window.location.href = "login.html";
+  }
+
+  function generateTextNotes(){
+    const text = document.getElementById("inputText").value.trim();
+    if(!text){ alert("Enter a paragraph"); return; }
+
+    // Simulated notes
+    const sentences = text.split(".");
+    document.getElementById("keyPoints").innerText = "• " + sentences.slice(0,3).join("\n• ");
+    document.getElementById("summary").innerText = sentences.slice(0,6).join(". ") + ".";
+    document.getElementById("conclusion").innerText = "Overall, this topic provides essential understanding and forms a foundation for further learning.";
+  }
+
+  function convertAudio(){
+    document.getElementById("audioStatus").innerText = "🎧 Audio processed (Demo)";
+    document.getElementById("keyPoints").innerText = "• Audio topic identified\n• Important terms recognized\n• Key ideas summarized";
+    document.getElementById("summary").innerText = "Audio content processed and summarized into notes highlighting main concepts.";
+    document.getElementById("conclusion").innerText = "Audio notes ready for revision and study.";
+  }
+</script>
+
+</body>
+</html>
